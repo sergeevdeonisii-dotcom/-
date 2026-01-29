@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newton's Cradle</title>
+  <style>
+    :root {
+      --bg: #e8edf2;
+      --desk: #c9a37a;
+      --desk-shadow: rgba(106, 79, 56, 0.45);
+      --frame: #2f3238;
+      --string: #6a6f78;
+      --ball: #cfd4da;
+      --ball-dark: #9aa2ad;
+      --accent: rgba(255, 255, 255, 0.7);
+      --swing-left: -32deg;
+      --swing-right: 32deg;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 50% 20%, #f7f9fb 0%, var(--bg) 45%, #dce2e8 100%);
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    .scene {
+      position: relative;
+      width: min(80vw, 720px);
+      height: min(70vh, 520px);
+      display: grid;
+      place-items: end center;
+    }
+
+    .desk {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 25%;
+      background: linear-gradient(180deg, #d7b08b 0%, var(--desk) 45%, #b48860 100%);
+      border-radius: 18px 18px 8px 8px;
+      box-shadow: 0 24px 50px -25px var(--desk-shadow);
+    }
+
+    .cradle {
+      position: relative;
+      width: 70%;
+      height: 65%;
+      margin-bottom: 9%;
+    }
+
+    .frame {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 100%;
+      border: 6px solid var(--frame);
+      border-bottom: 12px solid var(--frame);
+      border-radius: 16px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 55%);
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 8%;
+      left: 10%;
+      width: 80%;
+      height: 6px;
+      background: linear-gradient(90deg, #41464f 0%, #1f2228 50%, #3b3f47 100%);
+      border-radius: 999px;
+    }
+
+    .balls {
+      position: absolute;
+      top: 12%;
+      left: 7%;
+      width: 86%;
+      height: 80%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0 2%;
+    }
+
+    .pendulum {
+      position: relative;
+      width: 16%;
+      height: 100%;
+      transform-origin: top center;
+    }
+
+    .string {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 58%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #7b808a 0%, var(--string) 50%, #5b6069 100%);
+    }
+
+    .ball {
+      position: absolute;
+      top: 54%;
+      left: 50%;
+      width: 62px;
+      height: 62px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--accent) 0%, var(--ball) 35%, var(--ball-dark) 100%);
+      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+      filter: blur(0px);
+    }
+
+    .shadow {
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+      right: 0;
+      height: 20px;
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+      opacity: 0.5;
+      filter: blur(6px);
+    }
+
+    .pendulum.left {
+      animation: leftSwing 6s infinite ease-in-out;
+    }
+
+    .pendulum.right {
+      animation: rightSwing 6s infinite ease-in-out;
+    }
+
+    .pendulum.center {
+      animation: centerVibe 6s infinite linear;
+    }
+
+    .pendulum.left .ball,
+    .pendulum.right .ball {
+      animation: blurPulse 6s infinite linear;
+    }
+
+    @keyframes leftSwing {
+      0% {
+        transform: rotate(var(--swing-left));
+      }
+      18% {
+        transform: rotate(0deg);
+      }
+      44% {
+        transform: rotate(0deg);
+      }
+      70% {
+        transform: rotate(var(--swing-left));
+      }
+      100% {
+        transform: rotate(var(--swing-left));
+      }
+    }
+
+    @keyframes rightSwing {
+      0% {
+        transform: rotate(0deg);
+      }
+      18% {
+        transform: rotate(0deg);
+      }
+      30% {
+        transform: rotate(var(--swing-right));
+      }
+      45% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes centerVibe {
+      0%,
+      15% {
+        transform: rotate(0deg);
+      }
+      17% {
+        transform: rotate(1deg);
+      }
+      19% {
+        transform: rotate(-0.8deg);
+      }
+      21% {
+        transform: rotate(0.6deg);
+      }
+      24% {
+        transform: rotate(0deg);
+      }
+      42% {
+        transform: rotate(0deg);
+      }
+      44% {
+        transform: rotate(-1deg);
+      }
+      46% {
+        transform: rotate(0.8deg);
+      }
+      48% {
+        transform: rotate(-0.6deg);
+      }
+      51% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes blurPulse {
+      0%,
+      12%,
+      70%,
+      100% {
+        filter: blur(0px);
+      }
+      10%,
+      28%,
+      38% {
+        filter: blur(1.2px);
+      }
+    }
+
+    .pendulum::after {
+      content: "";
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      width: 70px;
+      height: 18px;
+      transform: translateX(-50%);
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+      opacity: 0.35;
+      filter: blur(6px);
+      transition: opacity 0.2s ease;
+    }
+
+    .pendulum.left::after {
+      animation: shadowLeft 6s infinite ease-in-out;
+    }
+
+    .pendulum.right::after {
+      animation: shadowRight 6s infinite ease-in-out;
+    }
+
+    @keyframes shadowLeft {
+      0% {
+        opacity: 0.2;
+        transform: translateX(-50%) scaleX(1.15);
+      }
+      18% {
+        opacity: 0.35;
+        transform: translateX(-50%) scaleX(0.9);
+      }
+      70% {
+        opacity: 0.2;
+        transform: translateX(-50%) scaleX(1.15);
+      }
+      100% {
+        opacity: 0.2;
+        transform: translateX(-50%) scaleX(1.15);
+      }
+    }
+
+    @keyframes shadowRight {
+      0% {
+        opacity: 0.35;
+        transform: translateX(-50%) scaleX(0.9);
+      }
+      30% {
+        opacity: 0.2;
+        transform: translateX(-50%) scaleX(1.15);
+      }
+      45% {
+        opacity: 0.35;
+        transform: translateX(-50%) scaleX(0.9);
+      }
+      100% {
+        opacity: 0.35;
+        transform: translateX(-50%) scaleX(0.9);
+      }
+    }
+
+    .note {
+      position: absolute;
+      top: 10%;
+      right: 6%;
+      font-size: 0.9rem;
+      color: rgba(40, 44, 52, 0.6);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+      .ball {
+        width: 46px;
+        height: 46px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="note">Newton's Cradle</div>
+    <div class="cradle">
+      <div class="frame"></div>
+      <div class="top-bar"></div>
+      <div class="balls">
+        <div class="pendulum left">
+          <div class="string"></div>
+          <div class="ball"></div>
+        </div>
+        <div class="pendulum center">
+          <div class="string"></div>
+          <div class="ball"></div>
+        </div>
+        <div class="pendulum center">
+          <div class="string"></div>
+          <div class="ball"></div>
+        </div>
+        <div class="pendulum center">
+          <div class="string"></div>
+          <div class="ball"></div>
+        </div>
+        <div class="pendulum right">
+          <div class="string"></div>
+          <div class="ball"></div>
+        </div>
+      </div>
+    </div>
+    <div class="desk"></div>
+  </div>
+</body>
+</html>
