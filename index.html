@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Планеты земной группы — Главная</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      background: #0b0f1a;
+      color: #f5f6fa;
+    }
+    header, main, footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    header {
+      text-align: center;
+    }
+    nav a {
+      color: #89c2ff;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    .planet-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .planet-card {
+      background: #151b2c;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .planet-card h2 {
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      color: #b9c2d3;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Планеты земной группы</h1>
+    <p>Каменные планеты Солнечной системы с плотным ядром и твердой поверхностью.</p>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="mercury.html">Меркурий</a>
+      <a href="venus.html">Венера</a>
+      <a href="earth.html">Земля</a>
+      <a href="mars.html">Марс</a>
+    </nav>
+  </header>
+  <main>
+    <section class="planet-list">
+      <article class="planet-card">
+        <h2><a href="mercury.html">Меркурий</a></h2>
+        <p>Самая близкая к Солнцу планета, с резкими перепадами температуры.</p>
+      </article>
+      <article class="planet-card">
+        <h2><a href="venus.html">Венера</a></h2>
+        <p>Горячий мир с плотной атмосферой и парниковым эффектом.</p>
+      </article>
+      <article class="planet-card">
+        <h2><a href="earth.html">Земля</a></h2>
+        <p>Единственная известная планета с устойчивой жидкой водой и жизнью.</p>
+      </article>
+      <article class="planet-card">
+        <h2><a href="mars.html">Марс</a></h2>
+        <p>Красная планета с полярными шапками и следами древних рек.</p>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <p>Учебный фрагмент сайта о планетах земной группы.</p>
+  </footer>
+</body>
+</html>
